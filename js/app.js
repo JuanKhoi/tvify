@@ -19,7 +19,9 @@ $(function(){
  				'<img src=":img:" alt="img alt">' +
  				'</div>' +
  				'<div class="right info">' +
- 				'<h1>:name:</h1>' +
+ 				'<h1><strong>Name:</strong> :name:</h1>' +
+ 				'<h4><strong>Genres:<strong/> :genres:</h4>'+
+ 				'<h4><strong>Language:<strong/> :language:</h4>'+
  				'<p>:summary:</p>' +
  				'</div>' +
  			'</article>'
@@ -31,10 +33,11 @@ $(function(){
  	 $.ajax({
  	 	url: 'http://api.tvmaze.com/shows',
  	 	success: function(shows){
- 	 	debugger
  	 		shows.forEach(function(show){//forEach ejecuta una función para cada elemento de un array
  	 			var article = template
  	 			.replace(':name:', show.name)
+ 	 			.replace(':genres:', show.genres)
+ 	 			.replace(':language:', show.language)
  	 			.replace(':img:', show.image.medium)
  	 			.replace(':summary:', show.summary)
  	 			.replace(':img alt:', show.name+"Logo")
