@@ -43,8 +43,10 @@ $(function(){
  	 			.replace(':img:', show.image.medium)
  	 			.replace(':summary:', show.summary)
  	 			.replace(':img alt:', show.name+"Logo")
- 	 			
- 	 			$tvShowContainer.append($(article))// Esto se realiza en cada iteración
+ 	 			var $article = $(article)
+ 	 			$tvShowContainer.append($article)// Esto se realiza en cada iteración
+ 	 			$article.hide()
+ 	 			$article.show('slow')
  	 	})
  	 	}
  	 })
