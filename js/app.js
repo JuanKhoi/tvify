@@ -1,4 +1,26 @@
 $(function(){
+	$tvShowContainer = $('#app-body').find('.tv-shows')
+	function renderShows(shows){
+		shows.forEach(function(show){//forEach ejecuta una función para cada elemento de un array
+ 	 			var article = template
+ 	 			.replace(':name:', show.name)
+ 	 			.replace(':genres:', show.genres)
+ 	 			.replace(':language:', show.language)
+ 	 			.replace(':img:', show.image.medium)
+ 	 			.replace(':summary:', show.summary)
+ 	 			.replace(':img alt:', show.name+"Logo")
+ 	 			var $article = $(article)
+ 	 			$tvShowContainer.append($article)// Esto se realiza en cada iteración
+ 	 			$article.hide()
+ 	 			$article.show('slow')
+ 	 	})
+
+	}
+
+
+
+
+
 	/*
 	* Submit de Search-Form
 	*/
@@ -9,7 +31,23 @@ $(function(){
 		var query  = $(this)
 		.find('input[type="text"]')//Seleecionando el input
 		.val()
-		alert(query)
+     	$tvShowContainer.find('.tv-show').remove()//Quitamos los shows de la lista
+	    var $loader = $('<div class=loader></div>')
+	    $loader.appendTo($tvShowContainer)
+        $.ajax({
+        	url: 'http://api.tvmaze.com/search/shows',
+        	data: {
+        		q: query
+        	},
+        	success: function(response){
+        		$loader.remove()
+        		var shows = response.map(function(elemento){
+        		return elemento.show
+        	})
+        		renderShows(shows)
+        	}
+        })
+
 	})
 	/*
 	*Template para articulo
@@ -33,23 +71,10 @@ $(function(){
  	 $.ajax({
  	 	url: 'http://api.tvmaze.com/shows',
  	 	success: function(shows){
- 	 		$tvShowContainer = $('#app-body').find('.tv-shows')
- 	 		$tvShowContainer.find('.loader').remove()
- 	 		shows.forEach(function(show){//forEach ejecuta una función para cada elemento de un array
- 	 			var article = template
- 	 			.replace(':name:', show.name)
- 	 			.replace(':genres:', show.genres)
- 	 			.replace(':language:', show.language)
- 	 			.replace(':img:', show.image.medium)
- 	 			.replace(':summary:', show.summary)
- 	 			.replace(':img alt:', show.name+"Logo")
- 	 			var $article = $(article)
- 	 			$tvShowContainer.append($article)// Esto se realiza en cada iteración
- 	 			$article.hide()
- 	 			$article.show('slow')
- 	 	})
+ 	 		
+ 	 		$tvShowContainer.find('.loader').remove()//Quitar el Spinner
+ 	 		renderShows(shows)
  	 	}
  	 })
-
 
 })
