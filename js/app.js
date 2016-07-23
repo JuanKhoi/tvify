@@ -33,6 +33,8 @@ $(function(){
  	 $.ajax({
  	 	url: 'http://api.tvmaze.com/shows',
  	 	success: function(shows){
+ 	 		$tvShowContainer = $('#app-body').find('.tv-shows')
+ 	 		$tvShowContainer.find('.loader').remove()
  	 		shows.forEach(function(show){//forEach ejecuta una función para cada elemento de un array
  	 			var article = template
  	 			.replace(':name:', show.name)
@@ -42,8 +44,7 @@ $(function(){
  	 			.replace(':summary:', show.summary)
  	 			.replace(':img alt:', show.name+"Logo")
  	 			
- 	 			$('#app-body')
- 	 			.find('.tv-shows').append($(article))// Esto se realiza en cada iteración
+ 	 			$tvShowContainer.append($(article))// Esto se realiza en cada iteración
  	 	})
  	 	}
  	 })
