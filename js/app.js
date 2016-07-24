@@ -7,7 +7,7 @@ $(function(){
  	 			.replace(':name:', show.name)
  	 			.replace(':genres:', show.genres)
  	 			.replace(':language:', show.language)
- 	 			.replace(':img:', show.image.medium)
+ 	 			.replace(':img:', show.image ? show.image.medium : '')
  	 			.replace(':summary:', show.summary)
  	 			.replace(':img alt:', show.name+"Logo")
  	 			var $article = $(article)
@@ -42,7 +42,7 @@ $(function(){
         	}
 
         })
-        .then(function(res, textStatus, xhr){
+        .then(function(response, textStatus, xhr){
         	$loader.remove()
         		var shows = response.map(function(elemento){
         		return elemento.show
