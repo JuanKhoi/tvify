@@ -1,3 +1,6 @@
+var $ = require("jquery");
+
+
 $(function(){
 	$tvShowContainer = $('#app-body').find('.tv-shows')
 	$tvShowContainer.on('click','button.like',function(ev){

@@ -1,0 +1,25 @@
+{
+  "name": "tvify",
+  "version": "1.0.0",
+  "description": "Conexión a API tvmaze",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JuanKhoi/tvify.git"
+  },
+  "author": "Juan Castaño",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JuanKhoi/tvify/issues"
+  },
+  "homepage": "https://github.com/JuanKhoi/tvify#readme",
+  "dependencies": {
+    "jquery": "^3.1.0"
+  },
+  "devDependencies": {
+    "browserify": "^13.0.1"
+  },
+  "scripts":{
+    "build-js":"browserify ./js/app.js -o bundle.js"
+  }
+}
