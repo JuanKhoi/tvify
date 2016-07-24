@@ -38,16 +38,16 @@ $(function(){
         	url: 'http://api.tvmaze.com/search/shows',
         	data: {
         		q: query
-        	},
-        	success: function(response){
-        		$loader.remove()
+        	}
+
+        })
+        .then(function(res, textStatus, xhr){
+        	$loader.remove()
         		var shows = response.map(function(elemento){
         		return elemento.show
         	})
         		renderShows(shows)
-        	}
         })
-
 	})
 	/*
 	*Template para articulo
@@ -69,12 +69,10 @@ $(function(){
  	*/
 
  	 $.ajax({
- 	 	url: 'http://api.tvmaze.com/shows',
- 	 	success: function(shows){
- 	 		
- 	 		$tvShowContainer.find('.loader').remove()//Quitar el Spinner
+ 	 	url: 'http://api.tvmaze.com/shows'})
+ 	 .then(function(shows, textStatus, xhr){
+ 	 	$tvShowContainer.find('.loader').remove()//Quitar el Spinner
  	 		renderShows(shows)
- 	 	}
  	 })
-
 })
+
