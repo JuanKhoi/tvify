@@ -1,5 +1,13 @@
 $(function(){
 	$tvShowContainer = $('#app-body').find('.tv-shows')
+	$tvShowContainer.on('click','button.like',function(ev){
+		var $this = $(this)
+		$this.animate({
+			'fontSize':'30px'
+		},'fast')
+		$this.closest('.tv-show')//Función de jQuery que busca el padre inmediato que cumpla condición
+		.toggleClass('liked')
+	})
 	function renderShows(shows){
 		$tvShowContainer.find('.loader').remove()//Quitar el Spinner
 		shows.forEach(function(show){//forEach ejecuta una función para cada elemento de un array
@@ -62,6 +70,7 @@ $(function(){
  				'<h4><strong>Genres:<strong/> :genres:</h4>'+
  				'<h4><strong>Language:<strong/> :language:</h4>'+
  				'<p>:summary:</p>' +
+ 				'<button class="like">💘</button>'+
  				'</div>' +
  			'</article>'
 
