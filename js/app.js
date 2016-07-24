@@ -1,6 +1,7 @@
 $(function(){
 	$tvShowContainer = $('#app-body').find('.tv-shows')
 	function renderShows(shows){
+		$tvShowContainer.find('.loader').remove()//Quitar el Spinner
 		shows.forEach(function(show){//forEach ejecuta una función para cada elemento de un array
  	 			var article = template
  	 			.replace(':name:', show.name)
@@ -64,15 +65,18 @@ $(function(){
  				'</div>' +
  			'</article>'
 
- 	/*
-    *Petición AJAX de todos los shows
- 	*/
-
- 	 $.ajax({
+ 	if(!localStorage.show){
+ 		$.ajax({
  	 	url: 'http://api.tvmaze.com/shows'})
  	 .then(function(shows, textStatus, xhr){
- 	 	$tvShowContainer.find('.loader').remove()//Quitar el Spinner
+ 	 	
+ 	 		localStorage.shows = JSON.stringify(shows)
  	 		renderShows(shows)
  	 })
+ 	}else{
+ 		renderShows(JSON.parse(localStorage.shows))
+ 	}
+
+ 	 
 })
 
